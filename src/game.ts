@@ -1,6 +1,13 @@
 import * as utils from '@dcl/ecs-scene-utils';
 import { NibiruCharacter } from './nibiru-character';
 
+const cube = new Entity();
+cube.addComponent(new BoxShape());
+cube.addComponent(
+  new Transform({ position: new Vector3(8, 0, 8), scale: new Vector3(2, 2, 2) })
+);
+engine.addEntity(cube);
+
 // Base
 const base = new Entity();
 base.addComponent(new GLTFShape('models/baseGrass.glb'));
@@ -10,7 +17,7 @@ engine.addEntity(base);
 const nibiruCharacter = new NibiruCharacter(
   new GLTFShape('models/Hooded.glb'),
   new Transform({
-    position: new Vector3(0, -0.9, -0.3),
+    position: new Vector3(0, -0.9, -0.5),
     scale: new Vector3(0, 0, 0)
   })
 );
@@ -51,6 +58,9 @@ class CheckPlayerIsMovingSystem implements ISystem {
   update() {
     if (currentPosition.equals(Camera.instance.position)) {
       nibiruCharacter.playIdle();
+    } else if (currentPosition.y != Camera.instance.position.y) {
+      currentPosition.copyFrom(Camera.instance.position);
+      nibiruCharacter.playJump();
     } else {
       currentPosition.copyFrom(Camera.instance.position);
       nibiruCharacter.playRunning();

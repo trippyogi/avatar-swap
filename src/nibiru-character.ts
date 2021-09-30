@@ -12,6 +12,9 @@ export class NibiruCharacter extends Entity {
     this.getComponent(Animator).addClip(
       new AnimationState('Idle', { looping: true })
     );
+    this.getComponent(Animator).addClip(
+      new AnimationState('Jump', { looping: true, speed: 1.3 })
+    );
   }
   // Play running animation
   playRunning() {
@@ -21,5 +24,10 @@ export class NibiruCharacter extends Entity {
   // Play idle animation
   playIdle() {
     this.getComponent(Animator).getClip('Idle').play();
+  }
+
+  // Play idle animation
+  playJump() {
+    this.getComponent(Animator).getClip('Jump').play();
   }
 }
