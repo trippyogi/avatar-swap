@@ -15,7 +15,7 @@ engine.addEntity(base);
 
 // Arissa
 const nibiruCharacter = new NibiruCharacter(
-  new GLTFShape('models/Hooded.glb'),
+  new GLTFShape('models/HoodedNibiru.glb'),
   new Transform({
     position: new Vector3(0, -0.9, -0.5),
     scale: new Vector3(0, 0, 0)
@@ -42,7 +42,7 @@ hideAvatarsEntity.addComponent(
     new utils.TriggerBoxShape(new Vector3(16, 4, 11), Vector3.Zero()),
     {
       onCameraEnter: () => {
-        nibiruCharacter.getComponent(Transform).scale.setAll(1.5);
+        nibiruCharacter.getComponent(Transform).scale.setAll(1.8);
       },
       onCameraExit: () => {
         nibiruCharacter.getComponent(Transform).scale.setAll(0);
